@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
+                            "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Tools">
+            <file name="org-jme3-netbeans-plaf-darkmonkey-DarkMonkeyAction.instance">
+                <!--org.jme3.netbeans.plaf.darkmonkey.DarkMonkeyAction-->
+                <attr
+                    bundlevalue="org.jme3.netbeans.plaf.darkmonkey.Bundle#CTL_DarkMonkeyAction" name="displayName"/>
+                <attr
+                    methodvalue="org.openide.awt.Actions.alwaysEnabled" name="instanceCreate"/>
+                <attr name="delegate" newvalue="org.jme3.netbeans.plaf.darkmonkey.DarkMonkeyAction"/>
+                <attr boolvalue="false" name="noIconInMenu"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="Tools">
+            <file name="org-jme3-netbeans-plaf-darkmonkey-DarkMonkeyAction.shadow">
+                <!--org.jme3.netbeans.plaf.darkmonkey.DarkMonkeyAction-->
+                <attr name="originalFile" stringvalue="Actions/Tools/org-jme3-netbeans-plaf-darkmonkey-DarkMonkeyAction.instance"/>
+                <attr intvalue="1800" name="position"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>
