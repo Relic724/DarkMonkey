@@ -7,6 +7,7 @@ package org.jme3.netbeans.plaf.darkmonkey;
 
 import java.awt.EventQueue;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import org.openide.modules.OnStart;
 import org.openide.windows.OnShowing;
 
@@ -19,6 +20,10 @@ public class DarkMonkeyValidator implements Runnable{
 
     @Override
     public void run() {
+        UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo(
+            new DarkMonkeyLookAndFeel().getName(), 
+            DarkMonkeyLookAndFeel.class.getName()));
+        
         //assert EventQueue.isDispatchThread();
         //JOptionPane.showMessageDialog(null,"Hello from the Validator");
     }

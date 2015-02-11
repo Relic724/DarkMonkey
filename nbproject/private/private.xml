@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/Bundle.properties</file>
             <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyLookAndFeel.java</file>
             <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyValidator.java</file>
-            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyAction.java</file>
-            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/Installer.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyIconFactory.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/manifest.mf</file>
         </group>
     </open-files>
 </project-private>

@@ -7,11 +7,8 @@ package org.jme3.netbeans.plaf.darkmonkey;
 
 import com.nilo.plaf.nimrod.NimRODTheme;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JOptionPane;
 import javax.swing.UIDefaults;
-import org.openide.util.NbPreferences;
 
 /**
  * The DarkMonkey look and feel class Extends the Nimrod LAF, which in turn,
@@ -39,7 +36,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         nt.setSecondary3(Color.decode("#515151"));
         nt.setFrameOpacity(180);
         nt.setMenuOpacity(219);
-        nt.setFont(Font.decode("DejaVu Sans Condensed-BOLD-12"));
+        nt.setFont(Font.decode("DejaVu Sans Condensed-PLAIN-12"));
         
         setCurrentTheme(nt);
         
@@ -82,7 +79,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
     @Override
     protected void initClassDefaults( UIDefaults table) {
         super.initClassDefaults( table);
-    
+       
         /* --Here are the current Element Drawing techniques that NimROD overrides on Metal        
         table.put( "ButtonUI", "com.nilo.plaf.nimrod.NimRODButtonUI");
         table.put( "ToggleButtonUI", "com.nilo.plaf.nimrod.NimRODToggleButtonUI");
@@ -131,11 +128,18 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
     @Override
     protected void initComponentDefaults( UIDefaults table) {
         super.initComponentDefaults( table);
+        
+        //table.put( "Tree.collapsedIcon", new SwingLazyValue( "org.jme3.netbeans.plaf.darkmonkey.DarkMonkeyIconFactory","getTreeCollapsedIcon"));
+        table.put("Tree.collapsedIcon", DarkMonkeyIconFactory.getTreeCollapsedIcon());
+        table.put("Tree.expandedIcon", DarkMonkeyIconFactory.getTreeExpandedIcon());
+        //table.put("Tree.DMCollapsedTreeIcon", Toolkit.getDefaultToolkit().createImage("icons/CollapsedTreeIcon.png"));
+
+//<editor-fold defaultstate="collapsed" desc="lot of Overwrites">
         /* and here are the listings of icons and colors
         try {
         ColorUIResource cFore = (ColorUIResource)table.get( "MenuItem.disabledForeground");
         ColorUIResource cBack = (ColorUIResource)table.get( "MenuItem.foreground");
-
+        
         ColorUIResource col = NimRODUtils.getColorTercio( cBack, cFore);
         table.put(  "MenuItem.disabledForeground", col);
         table.put(  "Label.disabledForeground", col);
@@ -147,7 +151,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put(  "ToggleButton.disabledText", col);
         table.put(  "CheckBox.disabledText", col);
         table.put(  "RadioButton.disabledText", col);
-
+        
         ColorUIResource col2 = NimRODUtils.getColorTercio( NimRODLookAndFeel.getWhite(),
         (Color)table.get( "TextField.inactiveBackground"));
         table.put( "TextField.inactiveBackground", col2);
@@ -155,9 +159,9 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         catch ( Exception ex) {
         ex.printStackTrace();
         }
-
+        
         table.put( "MenuBar.border", NimRODBorders.getMenuBarBorder());
-
+        
         Font fontMenu = ((Font)table.get( "Menu.font")).deriveFont( Font.BOLD);
         //table.put( "Menu.font", fontMenu);
         //table.put( "MenuItem.font", fontMenu);
@@ -167,22 +171,22 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "MenuItem.acceleratorFont", fontMenu);
         table.put( "RadioButtonMenuItem.acceleratorFont", fontMenu);
         table.put( "CheckBoxMenuItem.acceleratorFont", fontMenu);
-
+        
         ColorUIResource colAcce = NimRODUtils.getColorTercio( (ColorUIResource)table.get( "MenuItem.foreground"),
         (ColorUIResource)table.get( "MenuItem.acceleratorForeground")
         );
-
+        
         table.put( "MenuItem.acceleratorForeground", colAcce);
         table.put( "RadioButtonMenuItem.acceleratorForeground", colAcce);
         table.put( "CheckBoxMenuItem.acceleratorForeground", colAcce);
-
+        
         // Para la sombra de los popupmenus
         table.put( "BorderPopupMenu.SombraBajIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/SombraMenuBajo.png"));
         table.put( "BorderPopupMenu.SombraDerIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/SombraMenuDer.png"));
         table.put( "BorderPopupMenu.SombraEsqIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/SombraMenuEsq.png"));
         table.put( "BorderPopupMenu.SombraUpIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/SombraMenuUp.png"));
         table.put( "BorderPopupMenu.SombraIzqIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/SombraMenuIzq.png"));
-
+        
         // Para el JTree
         table.put( "Tree.collapsedIcon", NimRODIconFactory.getTreeCollapsedIcon());
         table.put( "Tree.expandedIcon", NimRODIconFactory.getTreeExpandedIcon());
@@ -190,7 +194,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "Tree.openIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/TreeDirAbierto.png"));
         table.put( "Tree.leafIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/TreeFicheroIcon.png"));
         table.put( "Tree.PelotillaIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/TreePelotilla.png"));
-
+        
         // Los dialogos de ficheros
         table.put( "FileView.directoryIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/DialogDirCerrado.png"));
         table.put( "FileView.fileIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/DialogFicheroIcon.png"));
@@ -201,15 +205,15 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "FileChooser.upFolderIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/DialogDirParriba.png"));
         table.put( "FileChooser.detailsViewIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/DialogDetails.png"));
         table.put( "FileChooser.listViewIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/DialogList.png"));
-
+        
         // Para los muchos CheckBox y RadioButtons
         table.put( "CheckBoxMenuItem.checkIcon", NimRODIconFactory.getCheckBoxMenuItemIcon());
         table.put( "RadioButtonMenuItem.checkIcon", NimRODIconFactory.getRadioButtonMenuItemIcon());
-
+        
         // La flechica de los combos...
         table.put( "ComboBox.flechaIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/ComboButtonDown.png"));
         table.put( "ComboBox.buttonDownIcon", NimRODIconFactory.getComboFlechaIcon());
-
+        
         // Los iconos de los menus
         table.put( "Menu.checkIcon", NimRODIconFactory.getBandaMenuItemIcon());
         table.put( "MenuItem.checkIcon", NimRODIconFactory.getBandaMenuItemIcon());
@@ -221,7 +225,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "CheckBox.iconTick", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/CheckBoxTick.png"));
         table.put( "RadioButton.iconBase", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/RadioButtonBase.png"));
         table.put( "RadioButton.iconTick", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/RadioButtonTick.png"));
-
+        
         // Iconos para los borders generales
         table.put( "BordeGenSup", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/BordeGenSup.png"));
         table.put( "BordeGenSupDer", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/BordeGenSupDer.png"));
@@ -231,7 +235,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "BordeGenInfIzq", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/BordeGenInfIzq.png"));
         table.put( "BordeGenIzq", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/BordeGenIzq.png"));
         table.put( "BordeGenSupIzq", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/BordeGenSupIzq.png"));
-
+        
         // Bordes generales
         table.put( "List.border", NimRODBorders.getGenBorder());
         table.put( "ScrollPane.viewportBorder", NimRODBorders.getGenBorder());
@@ -242,38 +246,38 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "FormattedTextField.border", NimRODBorders.getTextFieldBorder());
         table.put( "PasswordField.border", NimRODBorders.getTextFieldBorder());
         table.put( "ToolTip.border", NimRODBorders.getToolTipBorder());
-
+        
         table.put( "Table.focusCellHighlightBorder", NimRODBorders.getCellFocusBorder());
-
+        
         // Esto realmente no es necesario porque no se sobrecarga la clase ScrollPaneUI, pero si no se sobrecarga
         // el borde de ScrollPane, NetBeans 5.5 se queda tieso cuando cierras todas las pestañas del panel principal...
         table.put( "ScrollPane.border", NimRODBorders.getScrollPaneBorder());
-
+        
         // Para los ToolTips
         ColorUIResource col2 = NimRODUtils.getColorTercio( NimRODLookAndFeel.getFocusColor(),
         (Color)table.get( "TextField.inactiveBackground"));
         table.put( "ToolTip.background", col2);
         table.put( "ToolTip.font", ((Font)table.get( "Menu.font")));
-
+        
         // Para los Spinners
         table.put( "Spinner.editorBorderPainted", new Boolean( false));
         table.put( "Spinner.border", NimRODBorders.getTextFieldBorder());
         table.put( "Spinner.arrowButtonBorder", BorderFactory.createEmptyBorder());
         table.put( "Spinner.nextIcon", NimRODIconFactory.getSpinnerNextIcon());
         table.put( "Spinner.previousIcon", NimRODIconFactory.getSpinnerPreviousIcon());
-
+        
         // Los iconillos de los dialogos
         table.put( "OptionPane.errorIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/Error.png"));
         table.put( "OptionPane.informationIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/Inform.png"));
         table.put( "OptionPane.warningIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/Warn.png"));
         table.put( "OptionPane.questionIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/Question.png"));
-
+        
         // Para el JSlider
         table.put( "Slider.horizontalThumbIcon", NimRODIconFactory.getSliderHorizontalIcon());
         table.put( "Slider.verticalThumbIcon", NimRODIconFactory.getSliderVerticalIcon());
         table.put( "Slider.horizontalThumbIconImage", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/HorizontalThumbIconImage.png"));
         table.put( "Slider.verticalThumbIconImage", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/VerticalThumbIconImage.png"));
-
+        
         // Para las scrollbars
         table.put( "ScrollBar.horizontalThumbIconImage", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/HorizontalScrollIconImage.png"));
         table.put( "ScrollBar.verticalThumbIconImage", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/VerticalScrollIconImage.png"));
@@ -285,31 +289,31 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "ScrollBar.southButtonIcon", NimRODIconFactory.getScrollBarSouthButtonIcon());
         table.put( "ScrollBar.eastButtonIcon", NimRODIconFactory.getScrollBarEastButtonIcon());
         table.put( "ScrollBar.westButtonIcon", NimRODIconFactory.getScrollBarWestButtonIcon());
-
+        
         // Margenes de los botones
         table.put( "Button.margin", new InsetsUIResource( 5,14, 5,14));
         table.put( "ToggleButton.margin", new InsetsUIResource( 5,14, 5,14));
-
+        
         // Para los InternalFrames y sus iconillos
         table.put( "Desktop.background", table.get( "MenuItem.background"));
         table.put( "InternalFrame.border", NimRODBorders.getInternalFrameBorder());
-
+        
         table.put( "InternalFrame.NimCloseIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameClose.png"));
         table.put( "InternalFrame.NimCloseIconRoll", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameCloseRoll.png"));
         table.put( "InternalFrame.NimCloseIconPush", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameClosePush.png"));
-
+        
         table.put( "InternalFrame.NimMaxIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameMaximiza.png"));
         table.put( "InternalFrame.NimMaxIconRoll", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameMaximizaRoll.png"));
         table.put( "InternalFrame.NimMaxIconPush", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameMaximizaPush.png"));
-
+        
         table.put( "InternalFrame.NimMinIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameMinimiza.png"));
         table.put( "InternalFrame.NimMinIconRoll", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameMinimizaRoll.png"));
         table.put( "InternalFrame.NimMinIconPush", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameMinimizaPush.png"));
-
+        
         table.put( "InternalFrame.NimResizeIcon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameResize.png"));
         table.put( "InternalFrame.NimResizeIconRoll", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameResizeRoll.png"));
         table.put( "InternalFrame.NimResizeIconPush", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/FrameResizePush.png"));
-
+        
         table.put( "InternalFrame.closeIcon", NimRODIconFactory.getFrameCloseIcon());
         table.put( "InternalFrame.minimizeIcon", NimRODIconFactory.getFrameAltMaximizeIcon());
         table.put( "InternalFrame.maximizeIcon", NimRODIconFactory.getFrameMaxIcon());
@@ -317,25 +321,26 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         table.put( "InternalFrame.icon", NimRODUtils.loadRes( "/com/nilo/plaf/nimrod/icons/Frame.png"));
         table.put( "NimRODInternalFrameIconLit.width", new Integer( 20));
         table.put( "NimRODInternalFrameIconLit.height", new Integer( 20));
-
+        
         Font fontIcon = ((Font)table.get( "InternalFrame.titleFont")).deriveFont( Font.BOLD);
         table.put( "DesktopIcon.font", fontIcon);
         table.put( "NimRODDesktopIcon.width", new Integer( 80));
         table.put( "NimRODDesktopIcon.height", new Integer( 60));
         table.put( "NimRODDesktopIconBig.width", new Integer( 48));
         table.put( "NimRODDesktopIconBig.height", new Integer( 48));
-
+        
         // Esto no se usa dentro del codigo de NimROD LaF, pero SWTSwing y el plugin EoS de Eclipse si lo usan
         table.put( "InternalFrame.activeTitleBackground", getMenuSelectedBackground());
         table.put( "InternalFrame.activeTitleGradient", getMenuSelectedBackground().darker());
         table.put( "InternalFrame.inactiveTitleBackground", getMenuBackground().brighter());
-        table.put( "InternalFrame.inactiveTitleGradient", getMenuBackground().darker());*/    
+        table.put( "InternalFrame.inactiveTitleGradient", getMenuBackground().darker());*/
         //Esto es solo para saber que hay en la tabla
         /*
         for( Enumeration en = table.keys(); en.hasMoreElements(); ) {
-          System.out.println( "[" + en.nextElement() + "]");
+        System.out.println( "[" + en.nextElement() + "]");
         }
         */
+//</editor-fold>
     }
 
 }
