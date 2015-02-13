@@ -20,9 +20,6 @@ public class DarkMonkeyValidator implements Runnable{
 
     @Override
     public void run() {
-        UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo(
-            new DarkMonkeyLookAndFeel().getName(), 
-            DarkMonkeyLookAndFeel.class.getName()));
         
         //assert EventQueue.isDispatchThread();
         //JOptionPane.showMessageDialog(null,"Hello from the Validator");
