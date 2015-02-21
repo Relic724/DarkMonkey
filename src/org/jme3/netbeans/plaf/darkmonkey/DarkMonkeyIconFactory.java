@@ -9,13 +9,18 @@ import com.nilo.plaf.nimrod.NimRODIconFactory;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BandedSampleModel;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferFloat;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.Serializable;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.plaf.UIResource;
+
 /**
  * This class provides for overrides on the system Icons from the
  * NimROD look and feel
@@ -43,8 +48,12 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
     private static class TreeCollapsedIcon implements Icon, UIResource, Serializable{
         private int w, h;
         ImageIcon preProcessed;
+        {
+            w = 18;
+            h = 18;
+            preProcessed = null;
+        } 
         
-         
         public TreeCollapsedIcon(){ //maybe THIS is all I need, eh?
             w = 18;
             h = 18;
@@ -60,8 +69,16 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
 
             //process for first time, unless this gets "uninitialized" by
             // UIResource calls;
-            Image scaled = new ImageIcon("Resources/nextTry.png").getImage();
-            ImageIcon preProcess = new ImageIcon(scaled.getScaledInstance(w, h, Image.SCALE_DEFAULT));
+            BufferedImage bi = DMUtils.loadImagefromJar(this, "icons/nehonC2.png");
+            // start the experiments!
+            
+            Color[] normColorSet = {null, DarkMonkeyLookAndFeel.getWhite(), 
+                DarkMonkeyLookAndFeel.getControlShadow(), DarkMonkeyLookAndFeel.getPrimaryControl()};
+            bi = palletSwapARGB8(normColorSet, DarkMonkeyLookAndFeel.getWhite(), bi);
+            // end experiment, back to old code
+            ImageIcon ii = new ImageIcon(bi);
+            Image scaled = ii.getImage();
+            ImageIcon preProcess = new ImageIcon(scaled.getScaledInstance(w, h, Image.SCALE_SMOOTH));
             preProcess.paintIcon(c, g, x, y);
             preProcessed = preProcess;
         }
@@ -98,7 +115,14 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
 
             //process for first time, unless this gets "uninitialized" by
             // UIResource calls;
-            Image scaled = new ImageIcon("Resources/nextTry2.png").getImage();
+            
+            BufferedImage bi = DMUtils.loadImagefromJar(this, "icons/nehonE2.png");
+            Color[] normColorSet = { DarkMonkeyLookAndFeel.getWhite(), 
+                null, DarkMonkeyLookAndFeel.getPrimaryControl()};
+            bi = palletSwapARGB8(normColorSet, DarkMonkeyLookAndFeel.getWhite(), bi);
+            
+            ImageIcon ii = new ImageIcon(bi);
+            Image scaled = ii.getImage();
             
             ImageIcon preProcess = new ImageIcon(scaled.getScaledInstance(w, h, Image.SCALE_DEFAULT));
             
@@ -118,102 +142,149 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
         
     }
     
-//<editor-fold defaultstate="collapsed" desc="Oh god, Utility Functions..">
-    public static ImageIcon palletSwapARGB8(Color[] colorSet, Icon rgbMappedIcon, boolean isRGBOnly, int blurSize){
-        if(rgbMappedIcon == null) return null; // S.E.P.
-        if(blurSize < 0 || blurSize > 30) return null; // there is a bit shift involved.
+    
+    public static BufferedImage palletSwapARGB8 (Color[] colorSet, Color clearToColor, BufferedImage argbMappedBufferedImage){
+        if(argbMappedBufferedImage == null) return null; //S.E.P.
         
-        int w, h;
-        w = rgbMappedIcon.getIconWidth();
-        h = rgbMappedIcon.getIconHeight();
-        Color[] cMap = {Color.BLACK,Color.RED,Color.GREEN,Color.BLUE}; // for init and readability.
-        
-        if(colorSet != null){  //if we get a null colorSet... it's all mapped to white.
-            if(colorSet.length > cMap.length){ // if some improperly sized array comes through...
-                for(int i = 0; i < cMap.length; i++) if(colorSet[i] != null)
-                    cMap[i] =  colorSet[i]; // and finally, if any of the Colors are null... White
+        final Color BLACK_NO_ALPHA = new Color(0x00000000);
+        final Color WHITE_NO_ALPHA = new Color(0x00FFFFFF);
+        final int ALPHA = 3; // this is some static mapping for...
+        final int RED = 0; // readability in the following...
+        final int GREEN = 1; // Magic code section of band processing.
+        final int BLUE = 2;
+        final int[] orderedBands = {ALPHA,RED,GREEN,BLUE};
+        //first we prep a cmap with blank passes and 
+        Color[] cMap = {BLACK_NO_ALPHA,BLACK_NO_ALPHA,BLACK_NO_ALPHA,BLACK_NO_ALPHA};
+        if(colorSet != null){  //if we get a null colorSet... it's all mapped to clear.
+            if(colorSet.length > cMap.length){ // if colorSet is more than 4, we only proces  up to 4
+                for(int i = 0; i < cMap.length; i++) 
+                    if(colorSet[i] != null)
+                        cMap[orderedBands[i]] =  colorSet[i]; // and finally, if any of the Colors are null... invisible pass...
             } else {
-                for(int i = 0; i < colorSet.length; i++) if(colorSet[i] != null)
-                    cMap[i] =  colorSet[i];
+                int startOffset = 0;
+                if(colorSet.length < 4) // if less than standard size, assume RGB model
+                    startOffset++; // and "blank" the alpha color pass.
+                for(int i = 0; i < colorSet.length; i++) 
+                    if(colorSet[i] != null)
+                        cMap[orderedBands[i+startOffset]] =  colorSet[i];
             }
         }
-        
-        BufferedImage sourceImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        BufferedImage returnImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = sourceImage.createGraphics();
-        g2d.setBackground(new Color(0x00000000));
-        g2d.clearRect(0,0,w,h);
-        rgbMappedIcon.paintIcon(null, g2d, 0, 0); //transfer contents to sourceImage;
-        g2d = returnImage.createGraphics(); //switch over to working on returnImage
-        g2d.setBackground(new Color(0x00000000));
-        g2d.clearRect(0,0,w,h);
-        // now that the sourceImage is ready, time to break it down into
-        // normalized "alpha" channel multipliers.
-        float[][][] srcChannels = new float[4][w][h];
+        //Next we'll switch to Rasters to easily handle floating point precision
+        // operations upon the individual channels.
+
+        WritableRaster outRaster, inRaster;
+        int w = argbMappedBufferedImage.getWidth();
+        int h = argbMappedBufferedImage.getHeight();
+        BandedSampleModel inSM = new BandedSampleModel(DataBuffer.TYPE_FLOAT,w,h,4);
+        DataBufferFloat inDBF = new DataBufferFloat((w * h), 4);//4 banks, and total size 
+        inRaster = Raster.createWritableRaster(inSM, inDBF, null); // that null just means point 0, 0 (top/left)
+        outRaster = inRaster.createCompatibleWritableRaster(w,h);
+        float[] cMaptoFlArray, outColortoFlArray, clearColortoFlArray;
+        float inBandAsAlpha;
+        Color paletteColor;
+        // now we convert from W/E the argbMappedBufferedImage's format to 
+        // our normalized [0f..1f] RGBA raster
+        outColortoFlArray = new float[]{0f,0f,0f,0f}; // or new float[4]... w/e
+        clearColortoFlArray = clearToColor.getRGBComponents(new float[4]);
+        clearColortoFlArray[ALPHA] = 0f;
         for(int y = 0; y < h; y++){
             for(int x = 0; x < w; x++){
-                Color c1 = new Color(sourceImage.getRGB(x, y));
-                float[] normChannels = c1.getColorComponents(new float[4]);
-                for(int ch = 0; ch < 4; ch++){
-                    int blurPower = 1<<blurSize; //note: Pi and some type of exponent...somewhere...
-                    srcChannels[ch][x][y] = normChannels[ch]/blurPower;
-                }
+                int packedPixel = argbMappedBufferedImage.getRGB(x, y);
+                int testing = 0;
+                float ftesting = 0f;
+                //outColortoFlArray[ALPHA] = (((packedPixel >> 24) & 0xFF) / 255);
+                testing = packedPixel;
+                testing = testing >> 24;
+                testing = testing & 0xFF;
+                ftesting = testing;
+                ftesting = ftesting / 255;
+                outColortoFlArray[ALPHA] = ftesting;
+
+                //outColortoFlArray[RED]   = (((packedPixel >> 16) & 0xFF) / 255);
+                testing = packedPixel;
+                testing = testing >> 16;
+                testing = testing & 0xFF;
+                ftesting = testing;
+                ftesting = ftesting / 255;
+                outColortoFlArray[RED] = ftesting;
+                
+                //outColortoFlArray[GREEN] = (((packedPixel >>  8) & 0xFF) / 255);
+                testing = packedPixel;
+                testing = testing >> 8;
+                testing = testing & 0xFF;
+                ftesting = testing;
+                ftesting = ftesting / 255;
+                outColortoFlArray[GREEN] = ftesting;
+                
+                //outColortoFlArray[BLUE]  = ( (packedPixel & 0xFF)        / 255);
+                testing = packedPixel;
+                testing = testing & 0xFF;
+                ftesting = testing;
+                ftesting = ftesting / 255;
+                outColortoFlArray[BLUE] = ftesting;
+
+                inRaster.setPixel(x, y, outColortoFlArray);
+                outRaster.setPixel(x, y, clearColortoFlArray);
+                //outRaster.setPixel(x, y, new float[]{1f,1f,1f,0f});
+                /*               
+                inRaster.setSample(x, y, ALPHA, outColortoFlArray[ALPHA]);
+                inRaster.setSample(x, y, RED, outColortoFlArray[RED]);
+                inRaster.setSample(x, y, GREEN, outColortoFlArray[GREEN]);
+                inRaster.setSample(x, y, BLUE, outColortoFlArray[BLUE]);
+                */           
             }
         }
-        
-        // and now that I found out about the Color(int) and the
-        // "pixel" I'll get stuff ready for that... I was sooo
-        // annoyed that there isn't a Color(float[4]), but meh,
-        // I usually use JME3 to avoid this type of stuff.
-        final int AbM, RbM, GbM, BbM; // bitMask declaration time!
-        AbM = 0xFF000000; //Alpha Channel
-        RbM = 0x00FF0000; //Red Channel
-        GbM = 0x0000FF00; //Green Channel
-        BbM = 0x000000FF; //and Blue Channel
-        // I don't need them, but they are pretty! LoL it's early in the morning
-        
-        //Now for the passes
-        //Pass 1 - the Alpha Channel / srcChannels[3][x][y]
-        //this pass may be skipped;
-        if(!isRGBOnly){
+        // next, we process all bands in order - a "band" being one channel of A,R,G,B.
+        // as each band is processed the outRaster keeps getting "resampled" to apply
+        // the next band properly. all values are considered normalized [0f..1f]
+        for(int band : orderedBands){
+            paletteColor = cMap[band];
+            cMaptoFlArray = paletteColor.getRGBComponents(new float[4]);// this nullifies translucency
+            if (paletteColor != BLACK_NO_ALPHA){
             for(int y = 0; y < h; y++){
                 for(int x = 0; x < w; x++){
-                    float[] normChannels = cMap[0].getColorComponents(new float[4]);
-                    int pixel = ((int)(255 * normChannels[3] * srcChannels[3][x][y])<<24)|
-                            ((int)(255 * normChannels[0])<<16)|
-                            ((int)(255 * normChannels[1])<<8)|
-                            ((int)(255 * normChannels[2]));
+                    //inBandAsAlpha = inRaster.getSample(x, y, band);
+                    inBandAsAlpha = inRaster.getSampleFloat(x, y, band);
+                    outColortoFlArray = outRaster.getPixel(x, y, new float[4]);
+                    outColortoFlArray[RED] = (outColortoFlArray[RED] * 
+                            (1f - (inBandAsAlpha * cMaptoFlArray[ALPHA]))) + 
+                            (cMaptoFlArray[RED] * (inBandAsAlpha * cMaptoFlArray[ALPHA]));
+                    outColortoFlArray[GREEN] = (outColortoFlArray[GREEN] * 
+                            (1f - (inBandAsAlpha * cMaptoFlArray[ALPHA]))) + 
+                            (cMaptoFlArray[GREEN] * (inBandAsAlpha * cMaptoFlArray[ALPHA]));
+                    outColortoFlArray[BLUE] = (outColortoFlArray[BLUE] * 
+                            (1f - (inBandAsAlpha * cMaptoFlArray[ALPHA]))) + 
+                            (cMaptoFlArray[BLUE] * (inBandAsAlpha * cMaptoFlArray[ALPHA]));
+
+                    outColortoFlArray[ALPHA] = (outColortoFlArray[ALPHA] * 
+                            (1f - (inBandAsAlpha * cMaptoFlArray[ALPHA]))) + 
+                            (cMaptoFlArray[ALPHA] * (inBandAsAlpha * cMaptoFlArray[ALPHA]));
                     
-                    g2d.setColor(new Color(pixel));
-                    g2d.drawOval(x-blurSize, y-blurSize, blurSize, blurSize);
+                    outRaster.setPixel(x, y, outColortoFlArray);
                 }
+            }}
+        }
+        
+        //then we convert n' ship
+        BufferedImage returnBI = new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
+        for(int y = 0; y < h; y++){
+            for(int x = 0; x < w; x++){
+                outColortoFlArray = outRaster.getPixel(x,y, new float[4]);
+                int packedColor =   ((int)(outColortoFlArray[ALPHA] * 255f) << 24) |
+                                    ((int)(outColortoFlArray[RED]   * 255f) << 16) |
+                                    ((int)(outColortoFlArray[GREEN] * 255f) << 8 ) |
+                                    ((int)(outColortoFlArray[BLUE]  * 255f));
+                returnBI.setRGB(x, y, packedColor);
             }
         }
         
-        //Pass 2-4 or 1-3 lol.
-        for(int ch = 0; ch < 3; ch++){ //yeppers, don't need that alpha channel for this
-            for(int y = 0; y < h; y++){
-                for(int x = 0; x < w; x++){
-                    float[] normChannels = cMap[0].getColorComponents(new float[4]);
-                    int pixel = ((int)(255 * normChannels[3] * srcChannels[ch][x][y])<<24)|
-                            ((int)(255 * normChannels[0])<<16)|
-                            ((int)(255 * normChannels[1])<<8)|
-                            ((int)(255 * normChannels[2]));
-                    
-                    g2d.setColor(new Color(pixel));
-                    g2d.drawOval(x-blurSize, y-blurSize, blurSize, blurSize);
-                }
-            }
-        }
-        
-        // whew! and done!
-        
-        
-        return new ImageIcon(returnImage);
+        return returnBI;
     }
-    
-//</editor-fold>
-    
+
+    public static BufferedImage palletSwapARGB8 (Color[] colorSet, BufferedImage argbMappedBufferedImage){
+        Color clearToColor = new Color(0x00000000); // BLACK_NO_ALPHA;
+        return palletSwapARGB8(colorSet, clearToColor, argbMappedBufferedImage);
+    }
 
 
 }

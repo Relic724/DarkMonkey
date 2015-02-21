@@ -132,6 +132,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         //table.put( "Tree.collapsedIcon", new SwingLazyValue( "org.jme3.netbeans.plaf.darkmonkey.DarkMonkeyIconFactory","getTreeCollapsedIcon"));
         table.put("Tree.collapsedIcon", DarkMonkeyIconFactory.getTreeCollapsedIcon());
         table.put("Tree.expandedIcon", DarkMonkeyIconFactory.getTreeExpandedIcon());
+        
         //table.put("Tree.DMCollapsedTreeIcon", Toolkit.getDefaultToolkit().createImage("icons/CollapsedTreeIcon.png"));
 
 //<editor-fold defaultstate="collapsed" desc="lot of Overwrites">
