@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <!-- DarkMonkey Look and Feel Section -->
+
+    <!-- DarkMonkey Fonts and Colors Section -->
+    <folder name="Editors">
+        <!--  Begin with the first layer of Defaults for FaC "Dark Monkey"-->
+        <folder name="FontsColors">
+            <folder name="Dark Monkey">
+                <folder name="Defaults">
+                    <file name="DarkMonkeyFAC-Editor-token.xml" url="fac/DarkMonkeyFAC-Editor-token.xml" >
+                        <attr name="nbeditor-settings-ColoringType" stringvalue="token"/>
+                    </file>
+                    <file name="DarkMonkeyFAC-Editor-highlight.xml" url="fac/DarkMonkeyFAC-Editor-highlight.xml">
+                        <attr name="nbeditor-settings-ColoringType" stringvalue="highlight"/>
+                    </file>
+                    <file name="DarkMonkeyFAC-Editor-annotation.xml" url="fac/DarkMonkeyFAC-Editor-annotation.xml">
+                        <attr name="nbeditor-settings-ColoringType" stringvalue="annotation"/>
+                    </file>
+                </folder> <!-- "Defaults" -->
+            </folder> <!-- "Dark Monkey" -->
+        </folder> <!-- "FontsColors" -->
+
+        <!--  Begin with the mime-type specific layer of Defaults for FaC "Dark Monkey"-->
+        <folder name="text">
+            <folder name="css">
+                <folder name="FontsColors">
+                    <folder name="Dark Monkey">
+                        <folder name="Defaults">
+                            <file name="DarkMonkeyFAC-text-css-token.xml" url="fac/DarkMonkeyFAC-text-css-token.xml" >
+                                <attr name="nbeditor-settings-ColoringType" stringvalue="token"/>
+                            </file>
+                        </folder> <!-- "Defaults" -->
+                    </folder> <!-- "Dark Monkey" -->
+                </folder> <!-- "FontsColors" -->
+            </folder> <!-- "css" -->
+            <folder name="x-java">
+                <folder name="FontsColors">
+                    <folder name="Dark Monkey">
+                        <folder name="Defaults">
+                            <file name="DarkMonkeyFAC-text-x-java-token.xml" url="fac/DarkMonkeyFAC-text-x-java-token.xml" >
+                                <attr name="nbeditor-settings-ColoringType" stringvalue="token"/>
+                            </file>
+                        </folder> <!-- "Defaults" -->
+                    </folder> <!-- "Dark Monkey" -->
+                </folder> <!-- "FontsColors" -->
+            </folder> <!-- "x-java" -->
+        </folder> <!-- "text" -->
+    </folder> <!-- "Editors" -->
+</filesystem>

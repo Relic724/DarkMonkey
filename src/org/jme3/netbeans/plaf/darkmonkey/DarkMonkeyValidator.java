@@ -12,7 +12,8 @@ import org.openide.modules.OnStart;
 import org.openide.windows.OnShowing;
 
 /**
- *
+ * This is something that would be used once the nbm format is no longer
+ * needed and is absorbed by SDK downloadable.
  * @author charles
  */
 @OnStart

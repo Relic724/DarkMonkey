@@ -73,7 +73,7 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
             // start the experiments!
             
             Color[] normColorSet = {null, DarkMonkeyLookAndFeel.getWhite(), 
-                DarkMonkeyLookAndFeel.getControlShadow(), DarkMonkeyLookAndFeel.getPrimaryControl()};
+                null, DarkMonkeyLookAndFeel.getPrimaryControl()};
             bi = palletSwapARGB8(normColorSet, DarkMonkeyLookAndFeel.getWhite(), bi);
             // end experiment, back to old code
             ImageIcon ii = new ImageIcon(bi);

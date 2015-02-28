@@ -1,0 +1,8 @@
+- Note from Charles - 
+
+This is a redundant copy of the base source + jar. It makes the 
+nbm bulkier. But if the base ever needs to be altered, we have the
+modified source / jar pair. NimRod is on LGPL, which I've got a copy
+of in License 
+
+http://nilogonzalez.es/nimrodlf/index-en.html
