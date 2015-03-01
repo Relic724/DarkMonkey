@@ -22,7 +22,7 @@ public class DarkMonkeyValidator implements Runnable{
     @Override
     public void run() {
         
-        //assert EventQueue.isDispatchThread();
+        //assert EventQueue.isDispatchThread(); // this is for @OnShowing
         //JOptionPane.showMessageDialog(null,"Hello from the Validator");
     }
     

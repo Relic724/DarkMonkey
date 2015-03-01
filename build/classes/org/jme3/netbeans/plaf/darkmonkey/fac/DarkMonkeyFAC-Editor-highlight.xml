@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fontscolors PUBLIC "-//NetBeans//DTD Editor Fonts and Colors settings 1.1//EN" "http://www.netbeans.org/dtds/EditorFontsColors-1_1.dtd">
 <fontscolors>
-    <fontcolor foreColor="white" name="caret-color-insert-mode"/>
-    <fontcolor foreColor="ff6b8eb2" name="nbeditor-bracesMatching-sidebar"/>
-    <fontcolor name="trailing-whitespace"/>
-    <fontcolor foreColor="ffd3d3d3" name="indent-guide-lines"/>
-    <fontcolor foreColor="ff22282a" name="text-limit-line-color"/>
-    <fontcolor bgColor="darkGray" name="readonly-files"/>
-    <fontcolor foreColor="blue" name="hyperlinks" underline="blue"/>
-    <fontcolor foreColor="red" name="status-bar-bold"/>
-    <fontcolor foreColor="white" name="caret-color-overwrite-mode"/>
+    
+    <!-- Normal Highlights -->
+    <fontcolor name="block-search" foreColor="black" bgColor="ffe0e8f1"/>
+    <fontcolor name="code-folding" foreColor="ff666666"/>
+    <fontcolor name="code-folding-bar" foreColor="ff666666"/>
+    <fontcolor name="guarded" bgColor="darkGray"/>
+    <fontcolor name="readonly-files" bgColor="darkGray"/>
+    <fontcolor name="highlight-caret-row" bgColor="ff383838"/>
+    <fontcolor name="highlight-search" foreColor="black" bgColor="ffFFB442"/>
+    <fontcolor name="inc-search" foreColor="black" bgColor="ffcccc00"/> 
+    <fontcolor name="line-number" foreColor="ff81969a" bgColor="ff121212"/>
+    <fontcolor name="indent-guide-lines" foreColor="ffa3a3a3"/>
+    <fontcolor name="selection" bgColor="ff404e51"/>
     <fontcolor name="status-bar"/>
-    <fontcolor foreColor="ffcc0099" name="synchronized-text-blocks-ext"/>
-    <fontcolor bgColor="ffffb442" foreColor="black" name="highlight-search"/>
-    <fontcolor foreColor="ff996600" name="synchronized-text-blocks-ext-slave"/>
-    <fontcolor bgColor="gray" foreColor="ff990000" name="nbeditor-bracesMatching-mismatch"/>
-    <fontcolor foreColor="ff666666" name="code-folding"/>
-    <fontcolor bgColor="ffe0e8f1" foreColor="black" name="block-search"/>
-    <fontcolor foreColor="yellow" name="nbeditor-bracesMatching-match-multichar"/>
-    <fontcolor bgColor="ff121212" foreColor="ff81969a" name="line-number"/>
-    <fontcolor bgColor="ff383838" name="highlight-caret-row"/>
-    <fontcolor bgColor="ff404e51" name="selection"/>
-    <fontcolor bgColor="ffcccc00" foreColor="black" name="inc-search"/>
+    <fontcolor name="status-bar-bold" foreColor="red"/>
+    <fontcolor name="caret-color-insert-mode" foreColor="white"/>
+    <fontcolor name="caret-color-overwrite-mode" foreColor="white"/>
+    <fontcolor name="text-limit-line-color" foreColor="ff22282a"/>
+    <fontcolor name="hyperlinks" foreColor="ff7070e0" underline="blue"/>
+    <fontcolor name="synchronized-text-blocks" default="guarded"/> 
+    <fontcolor name="synchronized-text-blocks-ext" foreColor="ffCC0099"/>
+    <fontcolor name="synchronized-text-blocks-ext-slave" foreColor="ff996600"/>
     <fontcolor name="indent-whitespace"/>
-    <fontcolor foreColor="ff666666" name="code-folding-bar"/>
-    <fontcolor bgColor="gray" foreColor="ff990000" name="nbeditor-bracesMatching-mismatch-multichar"/>
-    <fontcolor bgColor="ff3b474a" foreColor="yellow" name="nbeditor-bracesMatching-match"/>
-    <fontcolor bgColor="darkGray" name="guarded"/>
+    <fontcolor name="trailing-whitespace"/>
+    
+    <!-- Matching Braces Highlights -->
+    <fontcolor name="nbeditor-bracesMatching-match" foreColor="yellow" bgColor="ff3b474a"/>
+    <fontcolor name="nbeditor-bracesMatching-mismatch" foreColor="ff990000" bgColor="gray" />
+    <fontcolor name="nbeditor-bracesMatching-match-multichar" foreColor="yellow"/>
+    <fontcolor name="nbeditor-bracesMatching-mismatch-multichar" foreColor="ff990000" bgColor="gray"/>
+    <fontcolor name="nbeditor-bracesMatching-sidebar" foreColor="ff6b8eb2"/>
+
 </fontscolors>
