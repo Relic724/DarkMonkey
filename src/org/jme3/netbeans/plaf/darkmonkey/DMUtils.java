@@ -7,6 +7,7 @@ package org.jme3.netbeans.plaf.darkmonkey;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BandedSampleModel;
 import java.awt.image.BufferedImage;
@@ -17,10 +18,6 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.NoSuchFileException;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import javax.imageio.ImageIO;
 
 /**
@@ -31,7 +28,6 @@ import javax.imageio.ImageIO;
  * @author charles
  */
 public class DMUtils {
-
 
     /**
      * <p>
@@ -67,6 +63,42 @@ public class DMUtils {
         return bi;
     }
 
+    public static void loadFontsFromJar(Object refObj, String[] fileNames) {
+        //first, we grab ahold of what all fonts are in the JRE's system
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Font[] fontsListing = ge.getAllFonts();
+        /* // this can be uncommented if you want to see all the fonts in the JRE
+         for (Font fontInListing : fontsListing) {
+         System.out.println(fontInListing.getFontName() + " : " + fontInListing.getFamily());
+         }
+         */
+        //Next we get a listing of all of the fonts in the refObj's jar at relPath
+
+        InputStream inStream;
+        Font checkFont;
+        try {
+            toNextFileName:
+            for (String fileName : fileNames) {
+                checkFont = Font.createFont(Font.TRUETYPE_FONT, refObj.getClass().getResourceAsStream(fileName));
+                for (Font fontInListing : fontsListing) {
+                    if (fontInListing.getFontName().equals(checkFont.getFontName())) {
+                        System.out.println(checkFont.getFontName() + " has been found. No action taken.");
+                        continue toNextFileName;
+                    }
+                }
+                System.out.println(checkFont.getFontName() + " was not listed. Registering it now.");
+                ge.registerFont(checkFont);
+            }
+        } catch (FontFormatException | IOException e) {
+            // a File is probably referenced wrong or "mispleled"... lol.
+            // you can alternativly send a single String for debugging purposes
+            e.printStackTrace();
+        }
+        fontsListing = ge.getAllFonts();
+        for (Font fontInListing : fontsListing) {
+            System.out.println(fontInListing.getFontName() + " : " + fontInListing.getFamily());
+        }
+    }
 
     /**
      * This method transforms the inputed BufferedImage by the supplied Color[].

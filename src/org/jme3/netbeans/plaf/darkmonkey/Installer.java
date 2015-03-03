@@ -19,7 +19,26 @@ public class Installer extends ModuleInstall {
                 new DarkMonkeyLookAndFeel().getName(),
                 DarkMonkeyLookAndFeel.class.getName()));
         // TODO
+        
+        String[] fontsToLoad = { 
+            "fonts/Planetary Orbiter.TTF",
+            "fonts/Planetary Orbiter Bold.TTF",
+            "fonts/Planetary Orbiter Italic.TTF",
+            "fonts/PlanetaryOrbiter-BoldItalic.ttf",
+            "fonts/DejaVuSans.ttf",
+            "fonts/DejaVuSans-Bold.ttf",
+            "fonts/DejaVuSans-Oblique.ttf",
+            "fonts/DejaVuSans-BoldOblique.ttf",
+            "fonts/DejaVuSansCondensed.ttf",
+            "fonts/DejaVuSansCondensed-Bold.ttf",
+            "fonts/DejaVuSansCondensed-Oblique.ttf",
+            "fonts/DejaVuSansCondensed-BoldOblique.ttf",
+            "fonts/DejaVuSansMono.ttf",
+            "fonts/DejaVuSansMono-Bold.ttf",
+            "fonts/DejaVuSansMono-Oblique.ttf",
+            "fonts/DejaVuSansMono-BoldOblique.ttf"
+        };
+        DMUtils.loadFontsFromJar(this, fontsToLoad);
     }
-
 
 }

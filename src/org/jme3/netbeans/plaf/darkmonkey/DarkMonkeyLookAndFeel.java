@@ -8,6 +8,7 @@ package org.jme3.netbeans.plaf.darkmonkey;
 import com.nilo.plaf.nimrod.NimRODTheme;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 import javax.swing.UIDefaults;
 
 /**
@@ -41,7 +42,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         nt.setSecondary3(Color.decode("#515151"));
         nt.setFrameOpacity(180);
         nt.setMenuOpacity(219);
-        nt.setFont(Font.decode("DejaVu Sans Condensed-PLAIN-12"));
+        nt.setFont(Font.decode("Planetary Orbiter-PLAIN-18"));
         
         setCurrentTheme(nt);
         
@@ -97,7 +98,7 @@ public class DarkMonkeyLookAndFeel extends com.nilo.plaf.nimrod.NimRODLookAndFee
         
         table.put("Tree.collapsedIcon", DarkMonkeyIconFactory.getTreeCollapsedIcon());
         table.put("Tree.expandedIcon", DarkMonkeyIconFactory.getTreeExpandedIcon());
-        
+             
     }
 
 }

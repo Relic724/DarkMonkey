@@ -2,6 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyLookAndFeel.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/Installer.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DMUtils.java</file>
+        </group>
     </open-files>
 </project-private>
