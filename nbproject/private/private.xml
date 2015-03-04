@@ -4,8 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyLookAndFeel.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/arch.xml</file>
             <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/Installer.java</file>
             <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DMUtils.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/AUTHORS.txt</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/DarkMonkeyIconFactory.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/layer.xml</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/LICENSE.txt</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/fac/DarkMonkeyFAC-Editor-token.xml</file>
         </group>
     </open-files>
 </project-private>

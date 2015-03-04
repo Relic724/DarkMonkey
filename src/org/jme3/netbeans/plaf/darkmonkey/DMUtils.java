@@ -63,41 +63,52 @@ public class DMUtils {
         return bi;
     }
 
+    /**<p>
+     * This utility method is designed to Load OpenType/TrueType fonts into the 
+     * current Runtime Environment without installing them to the OS.  It takes 
+     * the base path of the refObj and loads font files located relative to it.
+     * It checks to make sure that the fonts are not already installed in the system
+     * OS, first.  If they are already installed, it does nothing more.
+     * </p><p>
+     * Typical Usage - DMUtils.loadFontsFromJar(this, someFontFiles);<br/>
+     * and then someFontFiles[0] would contain something like "myfonts/DisFontPlain.ttf"
+     * </p>
+     * @param refObj - Object - Usually just a *this*, but useful for a multiClassLoader
+     * type situation.
+     * @param fileNames - String[] - an array of {relative path + filename} strings for loading
+     *  TrueType or OpenType fonts
+     */
     public static void loadFontsFromJar(Object refObj, String[] fileNames) {
         //first, we grab ahold of what all fonts are in the JRE's system
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Font[] fontsListing = ge.getAllFonts();
+
         /* // this can be uncommented if you want to see all the fonts in the JRE
          for (Font fontInListing : fontsListing) {
          System.out.println(fontInListing.getFontName() + " : " + fontInListing.getFamily());
          }
          */
-        //Next we get a listing of all of the fonts in the refObj's jar at relPath
 
+        // Then we go and process the incoming streams
         InputStream inStream;
         Font checkFont;
         try {
             toNextFileName:
-            for (String fileName : fileNames) {
+            for (String fileName : fileNames) {// load up the fileName to process...
                 checkFont = Font.createFont(Font.TRUETYPE_FONT, refObj.getClass().getResourceAsStream(fileName));
-                for (Font fontInListing : fontsListing) {
+                for (Font fontInListing : fontsListing) {// check if it's already on the list
                     if (fontInListing.getFontName().equals(checkFont.getFontName())) {
-                        System.out.println(checkFont.getFontName() + " has been found. No action taken.");
-                        continue toNextFileName;
+                        continue toNextFileName; //head to the next file if we find it...
                     }
                 }
-                System.out.println(checkFont.getFontName() + " was not listed. Registering it now.");
-                ge.registerFont(checkFont);
+                ge.registerFont(checkFont);// and register it if we don't....
             }
         } catch (FontFormatException | IOException e) {
             // a File is probably referenced wrong or "mispleled"... lol.
             // you can alternativly send a single String for debugging purposes
             e.printStackTrace();
         }
-        fontsListing = ge.getAllFonts();
-        for (Font fontInListing : fontsListing) {
-            System.out.println(fontInListing.getFontName() + " : " + fontInListing.getFamily());
-        }
+        
     }
 
     /**

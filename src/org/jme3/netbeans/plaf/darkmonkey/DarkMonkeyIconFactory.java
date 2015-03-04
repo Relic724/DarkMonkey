@@ -70,12 +70,12 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
 
             //process for first time, unless this gets "uninitialized" by
             // UIResource calls;
-            BufferedImage bi = DMUtils.loadImagefromJar(this, "icons/Gooseface.png");
+            BufferedImage bi = DMUtils.loadImagefromJar(this, "icons/nehonC2.png");
             // start the experiments!
             
             Color[] normColorSet = {null, DarkMonkeyLookAndFeel.getWhite(), 
                 null, DarkMonkeyLookAndFeel.getPrimaryControl()};
-            //bi = DMUtils.paletteSwapARGB8(normColorSet, bi);
+            bi = DMUtils.paletteSwapARGB8(normColorSet, bi);
             // end experiment, back to old code
             ImageIcon ii = new ImageIcon(bi);
             Image scaled = ii.getImage();
@@ -117,7 +117,7 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
             //process for first time, unless this gets "uninitialized" by
             // UIResource calls;
             
-            BufferedImage bi = DMUtils.loadImagefromJar(this, "icons/Gooseface.png");
+            BufferedImage bi = DMUtils.loadImagefromJar(this, "icons/nehonE2.png");
             Color[] normColorSet = { DarkMonkeyLookAndFeel.getWhite(), 
                 null, DarkMonkeyLookAndFeel.getPrimaryControl()};
             bi = DMUtils.paletteSwapARGB8(normColorSet, bi);
