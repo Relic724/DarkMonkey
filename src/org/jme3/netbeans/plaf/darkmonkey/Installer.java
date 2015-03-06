@@ -21,10 +21,6 @@ public class Installer extends ModuleInstall {
         // TODO
         
         String[] fontsToLoad = { 
-            "fonts/Planetary Orbiter.TTF",
-            "fonts/Planetary Orbiter Bold.TTF",
-            "fonts/Planetary Orbiter Italic.TTF",
-            "fonts/PlanetaryOrbiter-BoldItalic.ttf",
             "fonts/DejaVuSans.ttf",
             "fonts/DejaVuSans-Bold.ttf",
             "fonts/DejaVuSans-Oblique.ttf",

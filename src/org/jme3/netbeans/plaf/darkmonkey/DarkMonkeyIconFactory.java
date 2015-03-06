@@ -99,7 +99,12 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
     private static class TreeExpandedIcon implements Icon, UIResource, Serializable{
         private int w, h;
         ImageIcon preProcessed;
-        
+        {
+            w = 18;
+            h = 18;
+            preProcessed = null;
+        } 
+
          
         public TreeExpandedIcon(){ //maybe THIS is all I need, eh?
             w = 18;
@@ -130,6 +135,7 @@ public class DarkMonkeyIconFactory extends NimRODIconFactory{
             preProcess.paintIcon(c, g, x, y);
             preProcessed = preProcess;
         }
+        
         @Override
         public int getIconWidth() {
             return w; 
