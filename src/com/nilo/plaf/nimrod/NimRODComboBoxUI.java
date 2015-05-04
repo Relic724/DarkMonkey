@@ -81,7 +81,7 @@ public class NimRODComboBoxUI extends MetalComboBoxUI {
     Dimension dim = super.getMinimumSize( c);
     
     if ( comboBox.isEditable() ) {
-      dim.height = editor.getPreferredSize().height - 2;
+     dim.height = editor.getPreferredSize().height  ; // problem is here
     }
     
     dim.width += 20;
@@ -103,7 +103,7 @@ public class NimRODComboBoxUI extends MetalComboBoxUI {
     public NimRODComboBoxEditor() {
       super();
       editor.setBorder( NimRODBorders.getComboEditorBorder());
-    }
+     }
   }
   
   private final class NimRODComboBoxButton extends MetalComboBoxButton {
@@ -373,6 +373,7 @@ public class NimRODComboBoxUI extends MetalComboBoxUI {
         }
 
         int cWidth = width - (insets.right + iconWidth);
+
 
         // Fix for 4238829: should lay out the JPanel.
         boolean shouldValidate = false;
