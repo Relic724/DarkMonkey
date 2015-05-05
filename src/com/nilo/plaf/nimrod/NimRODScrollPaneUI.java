@@ -131,7 +131,7 @@ public class NimRODScrollPaneUI extends BasicScrollPaneUI {
             g2d.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
       
             // Aqui se vuelve a poner el tamaño que tenia al principio, por el bug ese descubierto por Fabian Voith.
-            sp.setPreferredSize( dim);
+            //sp.setPreferredSize( dim); // bingo! found it!
           }
           
           // Esto esta aqui para solucionar un bug descubierto por Michael Flor

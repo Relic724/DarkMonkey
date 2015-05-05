@@ -294,9 +294,11 @@ public class NimRODLookAndFeel extends MetalLookAndFeel {
     table.put( "ListUI", "com.nilo.plaf.nimrod.NimRODListUI");
     table.put( "ComboBoxUI", "com.nilo.plaf.nimrod.NimRODComboBoxUI");
     table.put( "ScrollBarUI", "com.nilo.plaf.nimrod.NimRODScrollBarUI");
+    
     table.put( "ToolBarUI", "com.nilo.plaf.nimrod.NimRODToolBarUI");
     table.put( "ProgressBarUI", "com.nilo.plaf.nimrod.NimRODProgressBarUI");
     table.put( "ScrollPaneUI", "com.nilo.plaf.nimrod.NimRODScrollPaneUI");
+    
     
     table.put( "TabbedPaneUI", "com.nilo.plaf.nimrod.NimRODTabbedPaneUI");
     table.put( "TableHeaderUI", "com.nilo.plaf.nimrod.NimRODTableHeaderUI");
@@ -307,11 +309,13 @@ public class NimRODLookAndFeel extends MetalLookAndFeel {
     
     table.put( "ToolTipUI", "com.nilo.plaf.nimrod.NimRODToolTipUI");
     
+    
     // Todo esto, es para sacar un triste menu    
     table.put( "MenuBarUI", "com.nilo.plaf.nimrod.NimRODMenuBarUI");
     table.put( "MenuUI", "com.nilo.plaf.nimrod.NimRODMenuUI");
     table.put( "SeparatorUI", "com.nilo.plaf.nimrod.NimRODSeparatorUI");
     table.put( "PopupMenuUI", "com.nilo.plaf.nimrod.NimRODPopupMenuUI");
+    
     table.put( "PopupMenuSeparatorUI", "com.nilo.plaf.nimrod.NimRODPopupMenuSeparatorUI");
     table.put( "MenuItemUI", "com.nilo.plaf.nimrod.NimRODMenuItemUI");
     table.put( "CheckBoxMenuItemUI", "com.nilo.plaf.nimrod.NimRODCheckBoxMenuItemUI");
