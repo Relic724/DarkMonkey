@@ -12,9 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/com/nilo/plaf/nimrod/NimRODTableHeaderUI.java</file>
-            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/com/nilo/plaf/nimrod/NimRODScrollPaneUI.java</file>
-            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/com/nilo/plaf/nimrod/NimRODLookAndFeel.java</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/NewBSD-3Clause.txt</file>
+            <file>file:/G:/Archive/NetbeansProjects/JMESuite/DarkMonkey/src/org/jme3/netbeans/plaf/darkmonkey/LICENSE.txt</file>
         </group>
     </open-files>
 </project-private>
