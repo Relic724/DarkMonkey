@@ -203,8 +203,7 @@
                         </folder> <!-- "Defaults" -->
                     </folder> <!-- "Dark Monkey" -->
                 </folder> <!-- "FontsColors" -->
-            </folder> <!-- "xml" -->
-            
+            </folder> <!-- "xml" -->         
         </folder> <!-- "text" -->
-    </folder> <!-- "Editors" -->
+     </folder> <!-- "Editors" -->
 </filesystem>
