@@ -41,8 +41,8 @@
             </module-dependencies>
             <public-packages/>
             <class-path-extension>
-                <runtime-relative-path>ext/nimrodlf-1.2c.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/nimrodlf-1.2c.jar</binary-origin>
+                <runtime-relative-path>ext/nimrodlf.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/nimrodlf.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>
